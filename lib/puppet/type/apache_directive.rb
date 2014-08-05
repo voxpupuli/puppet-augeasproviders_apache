@@ -3,14 +3,28 @@
 # Copyright (c) 2013 Raphaël Pinson
 # Licensed under the Apache License, Version 2.0
 
-require File.dirname(__FILE__) + '/../../augeasproviders/type'
-
 Puppet::Type.newtype(:apache_directive) do
   @doc = 'Manages Apache directives'
 
-  extend AugeasProviders::Type
+  ensurable do
+    defaultvalues
+    block if block_given?
 
-  ensurable
+    newvalue(:positioned) do
+      current = self.retrieve
+      if current == :absent
+        provider.create
+      elsif !provider.in_position?
+        provider.destroy
+        provider.create
+      end
+    end
+
+    def insync?(is)
+      return true if should == :positioned and is == :present and provider.in_position?
+      super
+    end
+  end
 
   newparam(:name) do
     desc 'The directive name'
