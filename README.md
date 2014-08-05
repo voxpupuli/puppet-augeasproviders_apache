@@ -21,11 +21,11 @@ See [Puppet/Augeas pre-requisites](http://docs.puppetlabs.com/guides/augeas.html
 
 On Puppet 2.7.14+, the module can be installed easily ([documentation](http://docs.puppetlabs.com/puppet/latest/reference/modules_installing.html)):
 
-    puppet module install herculesteam/augeasproviders_ssh
+    puppet module install herculesteam/augeasproviders_apache
 
 You may see an error similar to this on Puppet 2.x ([#13858](http://projects.puppetlabs.com/issues/13858)):
 
-    Error 400 on SERVER: Puppet::Parser::AST::Resource failed with error ArgumentError: Invalid resource type `sshd_config` at ...
+    Error 400 on SERVER: Puppet::Parser::AST::Resource failed with error ArgumentError: Invalid resource type `apache_directive` at ...
 
 Ensure the module is present in your puppetmaster's own environment (it doesn't
 have to use it) and that the master has pluginsync enabled.  Run the agent on
