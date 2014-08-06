@@ -1,6 +1,6 @@
-# apache: type/provider for shell files for Puppet
+# apache: type/provider for apache files for Puppet
 
-This module provides a new type/provider for Puppet to read and modify shell
+This module provides a new type/provider for Puppet to read and modify apache
 config files using the Augeas configuration library.
 
 The advantage of using Augeas over the default Puppet `parsedfile`
