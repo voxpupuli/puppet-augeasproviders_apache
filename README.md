@@ -2,9 +2,9 @@
 [![Coverage Status](https://img.shields.io/coveralls/hercules-team/augeasproviders_apache.svg)](https://coveralls.io/r/hercules-team/augeasproviders_apache?branch=master)
 
 
-# apache: type/provider for apache files for Puppet
+# apache: types/providers for apache files for Puppet
 
-This module provides a new type/provider for Puppet to read and modify apache
+This module provides new types/providers for Puppet to read and modify apache
 config files using the Augeas configuration library.
 
 The advantage of using Augeas over the default Puppet `parsedfile`
