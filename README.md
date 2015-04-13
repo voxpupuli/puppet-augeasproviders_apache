@@ -64,6 +64,12 @@ Type documentation can be generated with `puppet doc -r type` or viewed on the
 
 ### apache_directive provider
 
+#### Composite namevars
+This type supports composite namevars in order to easily specify the entry you want to manage.  The format is:
+    <directive> of <context>
+or
+    <directive> of <context> in <filename>
+
 #### manage simple entry
 
     apache_directive { "StartServers":
@@ -89,6 +95,7 @@ Type documentation can be generated with `puppet doc -r type` or viewed on the
 
 The `SetEnv` directive is not unique per scope: the first arg identifies the entry we want to update, and needs to be taken into account. For this reason, we set `args_params` to `1`.
 
+
 #### set a value in a given context
 
     apache_directive { 'StartServers for mpm_prefork_module':
@@ -102,6 +109,17 @@ The `SetEnv` directive is not unique per scope: the first arg identifies the ent
 The directive is nested in the context of the `mpm_prefork_module` module, so we specify this with the `context` parameter.
 
 The value of `StartServers` for the `mpm_prefork_module` module will be set/updated to `4`. Note that the `IfModule` entry will not be created if it is missing.
+
+#### manage entry with composite namevars
+    apache_directive { 'Options of Directory[arg=\'"/var/www/html"\']':
+      ensure      => present,
+      args        => ['FollowSymLinks', ],
+    }
+
+    apache_directive { 'Options of Directory[arg=\'"/var/www/icons"\']':
+      ensure      => present,
+      args        => ['MultiViews', 'FollowSymLinks', ],
+    }
 
 
 ### apache_setenv provider

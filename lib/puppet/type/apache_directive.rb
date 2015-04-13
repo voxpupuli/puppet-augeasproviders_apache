@@ -26,9 +26,13 @@ Puppet::Type.newtype(:apache_directive) do
     end
   end
 
+  newparam(:namevar) do
+    desc 'The directive name var as utilized for resource control'
+    isnamevar
+  end
+
   newparam(:name) do
     desc 'The directive name'
-    isnamevar
   end
 
   newparam(:context) do
@@ -52,4 +56,35 @@ Puppet::Type.newtype(:apache_directive) do
   newparam(:target) do
     desc 'The config file to use'
   end
+
+  def self.title_patterns
+    identity = lambda { |x| x }
+    [
+      [
+        /^((\S+)\s+of\s+(.+))$/,
+        [
+          [ :namevar, identity ],
+          [ :name, identity ],
+          [ :context, identity ],
+        ]
+      ],
+      [
+        /^((\S+)\s+of\s+(.+)\s+in\s+(.*))$/,
+        [
+          [ :namevar, identity ],
+          [ :name, identity ],
+          [ :context, identity ],
+          [ :target, identity ],
+        ]
+      ],
+      [
+        /(.*)/,
+        [
+          [ :namevar, identity ],
+          [ :name, identity ],
+        ]
+      ]
+    ]
+  end
+
 end

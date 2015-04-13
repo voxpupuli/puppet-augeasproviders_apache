@@ -170,6 +170,27 @@ describe provider_class do
     end
   end
 
+  context "with full file" do
+    let(:tmptarget) { aug_fixture("full") }
+    let(:target) { tmptarget.path }
+
+    context "when using context" do
+      it "updating should update value" do
+        apply!(Puppet::Type.type(:apache_directive).new(
+          :name        => 'Options of Directory[arg="/"]',
+          :args_params => 0,
+          :args        => ['FollowSymLinks', 'Indexes'],
+          :ensure      => "present",
+          :target      => target,
+          :provider    => "augeas"
+        ))
+
+        aug_open(target, "Httpd.lns") do |aug|
+          aug.get('Directory[arg="/"]/Options/arg').should == ['FollowSymLinks', 'Indexes']
+        end
+      end
+    end
+  end
 
   context "with broken file" do
     let(:tmptarget) { aug_fixture("broken") }
