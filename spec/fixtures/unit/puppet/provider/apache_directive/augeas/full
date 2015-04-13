@@ -230,6 +230,19 @@ LogFormat "%{User-agent}i" agent
 # Include of directories ignores editors' and dpkg's backup files,
 # see README.Debian for details.
 
+#
+# Each directory to which Apache has access can be configured with respect
+# to which services and features are allowed and/or disabled in that
+# directory (and its subdirectories). 
+#
+# First, we configure the "default" to be a very restrictive set of 
+# features.  
+#
+<Directory />
+    Options FollowSymLinks
+    AllowOverride None
+</Directory>
+
 # Include generic snippets of statements
 Include conf.d/
 
