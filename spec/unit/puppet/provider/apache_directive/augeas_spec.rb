@@ -45,7 +45,7 @@ describe provider_class do
         }
       }
 
-      inst.size.should == 49
+      inst.size.should == 51
       inst[0].should == {:args=>["${APACHE_LOCK_DIR}/accept.lock"], :name=>"LockFile", :ensure=>:present, :context=>""}
       inst[5].should == {:args=>["5"], :name=>"KeepAliveTimeout", :ensure=>:present, :context=>""}
       inst[30].should == {:args=>["150"], :context=>"IfModule[1]", :name=>"MaxClients", :ensure=>:present}
