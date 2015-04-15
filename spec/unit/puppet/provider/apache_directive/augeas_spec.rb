@@ -186,7 +186,7 @@ describe provider_class do
         ))
 
         aug_open(target, "Httpd.lns") do |aug|
-          aug.get('Directory[arg="/"]/Options/arg').should == ['FollowSymLinks', 'Indexes']
+          aug.get('Directory[arg="/"]/directive[1]/arg').should == ['FollowSymLinks', 'Indexes']
         end
       end
     end
