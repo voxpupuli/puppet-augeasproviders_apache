@@ -167,14 +167,7 @@ describe provider_class do
           aug.get("IfModule[arg='mpm_worker_module']/directive[.='StartServers']/arg").should == '2'
         end
       end
-    end
-  end
 
-  context "with full file" do
-    let(:tmptarget) { aug_fixture("full") }
-    let(:target) { tmptarget.path }
-
-    context "when using context" do
       it "updating should update value" do
         apply!(Puppet::Type.type(:apache_directive).new(
           :name        => 'Options of Directory[arg="/"]',

@@ -27,12 +27,16 @@ Puppet::Type.newtype(:apache_directive) do
   end
 
   newparam(:namevar) do
-    desc 'The directive name var as utilized for resource control'
+    # puppet tries to treat name as namevar by default
+    # this makes the changes done via title_patterns create duplicate resources
+    # so we have a var here that only exists to avoid that
+    desc 'The directive namevar as utilized for resource control'
     isnamevar
   end
 
   newparam(:name) do
     desc 'The directive name'
+    isnamevar
   end
 
   newparam(:context) do
@@ -54,22 +58,14 @@ Puppet::Type.newtype(:apache_directive) do
   end
 
   newparam(:target) do
-    desc 'The config file to use'
+    desc 'The config file to modify'
   end
 
   def self.title_patterns
     identity = lambda { |x| x }
     [
       [
-        /^((\S+)\s+of\s+(.+))$/,
-        [
-          [ :namevar, identity ],
-          [ :name, identity ],
-          [ :context, identity ],
-        ]
-      ],
-      [
-        /^((\S+)\s+of\s+(.+)\s+in\s+(.*))$/,
+        /^((\w+)\s+of\s+(.+)\s+in\s+(.*))$/,
         [
           [ :namevar, identity ],
           [ :name, identity ],
@@ -78,13 +74,25 @@ Puppet::Type.newtype(:apache_directive) do
         ]
       ],
       [
-        /(.*)/,
+        /^((\w+)\s+of\s+(.+))$/,
+        [
+          [ :namevar, identity ],
+          [ :name, identity ],
+          [ :context, identity ],
+        ]
+      ],
+      [
+        /((.*))/,
         [
           [ :namevar, identity ],
           [ :name, identity ],
         ]
       ]
     ]
+  end
+
+  autorequire(:file) do
+    self[:target]
   end
 
 end
