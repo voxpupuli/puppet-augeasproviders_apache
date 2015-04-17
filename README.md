@@ -68,7 +68,7 @@ Type documentation can be generated with `puppet doc -r type` or viewed on the
 This type supports composite namevars in order to easily specify the entry you want to manage.  The format is:
     <directive> of <context>
 or
-    <directive> of <context> in <filename>
+    <directive> of <context> in <target>
 
 #### manage simple entry
 
