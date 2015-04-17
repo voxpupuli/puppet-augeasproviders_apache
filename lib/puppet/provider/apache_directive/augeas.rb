@@ -21,10 +21,10 @@ Puppet::Type.type(:apache_directive).provide(:augeas, :parent => Puppet::Type.ty
     path = '$target'
     path += "/#{resource[:context]}" unless resource[:context].empty?
     if supported?(:regexpi)
-      path += "/directive[.=~regexp('#{resource[:name]}', 'i')"
+      path += "/directive[.=~regexp('#{resource[:directive]}', 'i')"
     else
       debug "Warning: Augeas >= 1.0.0 is required for case-insensitive support in apache_directive resources"
-      path += "/directive[.='#{resource[:name]}'"
+      path += "/directive[.='#{resource[:directive]}'"
     end
     if resource[:args]
       resource[:args][0, resource[:args_params].to_i].each_with_index do |a, i|
@@ -60,7 +60,7 @@ Puppet::Type.type(:apache_directive).provide(:augeas, :parent => Puppet::Type.ty
     augopen! do |aug|
       top_path = '$target'
       top_path += "/#{resource[:context]}" unless resource[:context].empty?
-      last_path = "#{top_path}/directive[.='#{resource[:name]}'][last()]"
+      last_path = "#{top_path}/directive[.='#{resource[:directive]}'][last()]"
       if aug.match(last_path).empty?
         aug.clear("#{top_path}/directive[last()+1]") 
       else
@@ -70,7 +70,7 @@ Puppet::Type.type(:apache_directive).provide(:augeas, :parent => Puppet::Type.ty
 
       # The new node is the only directive without a value
       aug.defvar('new', "#{top_path}/directive[.='']")
-      aug.set('$new', resource[:name])
+      aug.set('$new', resource[:directive])
       resource[:args].each_with_index do |a,i|
         aug.set("$new/arg[#{i+1}]", a)
       end

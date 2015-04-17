@@ -26,17 +26,14 @@ Puppet::Type.newtype(:apache_directive) do
     end
   end
 
-  newparam(:namevar) do
-    # puppet tries to treat name as namevar by default
-    # this makes the changes done via title_patterns create duplicate resources
-    # so we have a var here that only exists to avoid that
-    desc 'The directive namevar as utilized for resource control'
-    isnamevar
-  end
-
   newparam(:name) do
     desc 'The directive name'
     isnamevar
+  end
+
+  newparam(:directive) do
+    desc 'The apache directive to modify'
+    defaultto self[:name]
   end
 
   newparam(:context) do
@@ -67,8 +64,8 @@ Puppet::Type.newtype(:apache_directive) do
       [
         /^((\w+)\s+of\s+(.+)\s+in\s+(.*))$/,
         [
-          [ :namevar, identity ],
           [ :name, identity ],
+          [ :directive, identity ],
           [ :context, identity ],
           [ :target, identity ],
         ]
@@ -76,16 +73,16 @@ Puppet::Type.newtype(:apache_directive) do
       [
         /^((\w+)\s+of\s+(.+))$/,
         [
-          [ :namevar, identity ],
           [ :name, identity ],
+          [ :directive, identity ],
           [ :context, identity ],
         ]
       ],
       [
         /((.*))/,
         [
-          [ :namevar, identity ],
           [ :name, identity ],
+          [ :directive, identity ],
         ]
       ]
     ]
