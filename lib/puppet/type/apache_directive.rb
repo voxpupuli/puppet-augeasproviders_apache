@@ -33,7 +33,7 @@ Puppet::Type.newtype(:apache_directive) do
 
   newparam(:directive) do
     desc 'The apache directive to modify'
-    defaultto self[:name]
+    defaultto { @resource[:name] }
   end
 
   newparam(:context) do
