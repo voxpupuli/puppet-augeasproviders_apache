@@ -105,6 +105,25 @@ describe provider_class do
           { "directive" = "Example" }
         ')
       end
+
+      it "should fail with same name" do
+        expect do
+          apply!(
+           Puppet::Type.type(:apache_directive).new(
+              :name      => "Listen",
+              :args      => "80",
+              :target    => target,
+              :provider  => "augeas"
+            ),
+            Puppet::Type.type(:apache_directive).new(
+              :name      => "Listen",
+              :args      => "443",
+              :target    => target,
+              :provider  => "augeas"
+            )
+          )
+        end.to raise_error(Puppet::Resource::Catalog::DuplicateResourceError)
+      end
     end
 
     context "when creating with context" do
@@ -166,6 +185,28 @@ describe provider_class do
         aug_open(target, "Httpd.lns") do |aug|
           aug.get("IfModule[arg='mpm_worker_module']/directive[.='StartServers']/arg").should == '2'
         end
+      end
+
+      it "should not fail with different names and different context" do
+        expect do
+          apply!(
+            Puppet::Type.type(:apache_directive).new(
+              :title     => "Listen80",
+              :name      => "Listen",
+              :args      => "80",
+              :target    => target,
+              :provider  => "augeas"
+            ),
+            Puppet::Type.type(:apache_directive).new(
+              :title     => "Listen443",
+              :name      => "Listen",
+              :args      => "443",
+              :context   => 'IfModule[arg="ssl_module"]',
+              :target    => target,
+              :provider  => "augeas"
+            )
+          )
+        end.not_to raise_error
       end
     end
   end

@@ -33,6 +33,7 @@ Puppet::Type.newtype(:apache_directive) do
 
   newparam(:context) do
     desc 'The path where the directive is located. Expressed as an Augeas path expression.'
+    isnamevar
     defaultto ''
   end
 
@@ -51,5 +52,40 @@ Puppet::Type.newtype(:apache_directive) do
 
   newparam(:target) do
     desc 'The config file to use'
+    isnamevar
+  end
+
+  def self.title_patterns
+    identity = lambda { |x| x }
+    [
+      [
+        /^(\S+)\s+from\s+(\S+)\s+in\s+(.*)$/,
+        [
+          [ :name, identity ],
+          [ :context, identity ],
+          [ :target, identity ],
+        ]
+      ],
+      [
+        /^(\S+)\s+from\s+(\S+)$/,
+        [
+          [ :name, identity ],
+          [ :context, identity ],
+        ]
+      ],
+      [
+        /^(\S+)\s+in\s+(.*)$/,
+        [
+          [ :name, identity ],
+          [ :target, identity ],
+        ]
+      ],
+      [
+        /(.*)/,
+        [
+          [ :name, identity ],
+        ]
+      ]
+    ]
   end
 end

@@ -140,6 +140,9 @@ KeepAliveTimeout 5
     MaxRequestsPerChild   0
 </IfModule>
 
+<IfModule ssl_module>
+</IfModule>
+
 # These need to be set in /etc/apache2/envvars
 User ${APACHE_RUN_USER}
 Group ${APACHE_RUN_GROUP}
