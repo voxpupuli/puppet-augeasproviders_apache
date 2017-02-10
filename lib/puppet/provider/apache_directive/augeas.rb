@@ -1,13 +1,15 @@
+# coding: utf-8
 # Manages an Apache directive
 #
 # Copyright (c) 2013 Raphaël Pinson
 # Licensed under the Apache License, Version 2.0
 
+raise("Missing augeasproviders_core dependency") if Puppet::Type.type(:augeasprovider).nil?
 Puppet::Type.type(:apache_directive).provide(:augeas, :parent => Puppet::Type.type(:augeasprovider).provider(:default)) do
   desc 'Use the Augeas API to update a directive in Apache'
 
   lens { 'Httpd.lns' }
-  
+
   default_file do
     case Facter.value(:osfamily)
     when 'RedHat'
