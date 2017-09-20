@@ -9,6 +9,7 @@ spec/fixtures/manifests
 spec/fixtures/modules
 yardoc/
 .yardoc/
+Gemfile.lock
 
 ## Ruby
 .rvmrc*
