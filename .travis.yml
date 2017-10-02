@@ -19,10 +19,8 @@ env:
 
 matrix:
   fast_finish: true
-  allow_failures:
-    - env: PUPPET=5.0 RUBY_AUGEAS=0.5
   exclude:
-# base exclude
+    # base exclude
     # No support for Ruby 2.1.9 in Puppet 5
     - rvm: 2.1.9
       env: PUPPET=5.0 RUBY_AUGEAS=0.5
