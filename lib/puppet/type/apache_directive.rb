@@ -56,34 +56,33 @@ Puppet::Type.newtype(:apache_directive) do
   end
 
   def self.title_patterns
-    identity = lambda { |x| x }
     [
       [
         /^(\S+)\s+from\s+(\S+)\s+in\s+(.*)$/,
         [
-          [ :name, identity ],
-          [ :context, identity ],
-          [ :target, identity ],
+          [ :name ],
+          [ :context ],
+          [ :target ],
         ]
       ],
       [
         /^(\S+)\s+from\s+(\S+)$/,
         [
-          [ :name, identity ],
-          [ :context, identity ],
+          [ :name ],
+          [ :context ],
         ]
       ],
       [
         /^(\S+)\s+in\s+(.*)$/,
         [
-          [ :name, identity ],
-          [ :target, identity ],
+          [ :name ],
+          [ :target ],
         ]
       ],
       [
         /(.*)/,
         [
-          [ :name, identity ],
+          [ :name ],
         ]
       ]
     ]

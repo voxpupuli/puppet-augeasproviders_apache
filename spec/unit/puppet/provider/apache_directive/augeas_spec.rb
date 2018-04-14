@@ -2,8 +2,6 @@
 
 require 'spec_helper'
 
-FileTest.stubs(:exist?).returns false
-FileTest.stubs(:exist?).with('/etc/apache2/apache2.conf').returns true
 provider_class = Puppet::Type.type(:apache_directive).provider(:augeas)
 
 describe provider_class do
