@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.0.3
+## 3.0.0
 
 - Fix support for 'puppet generate types'
 - Remove misplaced stubs in spec tests
