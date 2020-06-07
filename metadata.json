@@ -1,7 +1,7 @@
 {
   "name": "herculesteam-augeasproviders_apache",
   "version": "3.1.1",
-  "author": "Dominic Cleal, Raphael Pinson",
+  "author": "Raphael Pinson",
   "summary": "Augeas-based apache types and providers for Puppet",
   "license": "Apache-2.0",
   "source": "https://github.com/hercules-team/augeasproviders_apache",

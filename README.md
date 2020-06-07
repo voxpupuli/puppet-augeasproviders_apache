@@ -3,6 +3,7 @@
 [![Puppet Forge Endorsement](https://img.shields.io/puppetforge/e/herculesteam/augeasproviders_apache.svg)](https://forge.puppetlabs.com/herculesteam/augeasproviders_apache)
 [![Build Status](https://img.shields.io/travis/hercules-team/augeasproviders_apache/master.svg)](https://travis-ci.org/hercules-team/augeasproviders_apache)
 [![Coverage Status](https://img.shields.io/coveralls/hercules-team/augeasproviders_apache.svg)](https://coveralls.io/r/hercules-team/augeasproviders_apache)
+[![Sponsor](https://img.shields.io/badge/%E2%99%A5-Sponsor-hotpink.svg)](https://github.com/sponsors/raphink)
 
 
 # apache: types/providers for apache files for Puppet
