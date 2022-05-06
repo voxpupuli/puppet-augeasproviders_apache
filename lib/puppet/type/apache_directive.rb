@@ -11,7 +11,7 @@ Puppet::Type.newtype(:apache_directive) do
     block if block_given?
 
     newvalue(:positioned) do
-      current = self.retrieve
+      current = retrieve
       if current == :absent
         provider.create
       elsif !provider.in_position?
@@ -22,6 +22,7 @@ Puppet::Type.newtype(:apache_directive) do
 
     def insync?(is)
       return true if should == :positioned and is == :present and provider.in_position?
+
       super
     end
   end
@@ -37,7 +38,7 @@ Puppet::Type.newtype(:apache_directive) do
     defaultto ''
   end
 
-  newproperty(:args, :array_matching => :all) do
+  newproperty(:args, array_matching: :all) do
     desc 'An array of directive arguments'
   end
 
@@ -58,31 +59,31 @@ Puppet::Type.newtype(:apache_directive) do
   def self.title_patterns
     [
       [
-        /^(\S+)\s+from\s+(\S+)\s+in\s+(.*)$/,
+        %r{^(\S+)\s+from\s+(\S+)\s+in\s+(.*)$},
         [
-          [ :name ],
-          [ :context ],
-          [ :target ],
+          [:name],
+          [:context],
+          [:target],
         ]
       ],
       [
-        /^(\S+)\s+from\s+(\S+)$/,
+        %r{^(\S+)\s+from\s+(\S+)$},
         [
-          [ :name ],
-          [ :context ],
+          [:name],
+          [:context],
         ]
       ],
       [
-        /^(\S+)\s+in\s+(.*)$/,
+        %r{^(\S+)\s+in\s+(.*)$},
         [
-          [ :name ],
-          [ :target ],
+          [:name],
+          [:target],
         ]
       ],
       [
-        /(.*)/,
+        %r{(.*)},
         [
-          [ :name ],
+          [:name],
         ]
       ]
     ]

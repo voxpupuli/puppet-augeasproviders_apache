@@ -1,11 +1,11 @@
-# coding: utf-8
 # Manages an Apache directive
 #
 # Copyright (c) 2013 Raphaël Pinson
 # Licensed under the Apache License, Version 2.0
 
-raise("Missing augeasproviders_core dependency") if Puppet::Type.type(:augeasprovider).nil?
-Puppet::Type.type(:apache_directive).provide(:augeas, :parent => Puppet::Type.type(:augeasprovider).provider(:default)) do
+raise('Missing augeasproviders_core dependency') if Puppet::Type.type(:augeasprovider).nil?
+
+Puppet::Type.type(:apache_directive).provide(:augeas, parent: Puppet::Type.type(:augeasprovider).provider(:default)) do
   desc 'Use the Augeas API to update a directive in Apache'
 
   lens { 'Httpd.lns' }
@@ -25,35 +25,35 @@ Puppet::Type.type(:apache_directive).provide(:augeas, :parent => Puppet::Type.ty
     if supported?(:regexpi)
       path += "/directive[.=~regexp('#{resource[:name]}', 'i')"
     else
-      debug "Warning: Augeas >= 1.0.0 is required for case-insensitive support in apache_directive resources"
+      debug 'Warning: Augeas >= 1.0.0 is required for case-insensitive support in apache_directive resources'
       path += "/directive[.='#{resource[:name]}'"
     end
     if resource[:args]
       resource[:args][0, resource[:args_params].to_i].each_with_index do |a, i|
-        path += " and arg[#{i+1}]='#{a}'"
+        path += " and arg[#{i + 1}]='#{a}'"
       end
     end
     path += ']'
     path
   end
 
-  confine :feature => :augeas
+  confine feature: :augeas
 
   def self.instances
     augopen do |aug|
       aug.match('$target//directive').map do |spath|
         # Find path
-        context = spath.slice("/files#{target}".length+1..-1).sub(%r{/?directive.*}, '')
+        context = spath.slice("/files#{target}".length + 1..-1).sub(%r{/?directive.*}, '')
         args = aug.match("#{spath}/arg").map do |apath|
           aug.get(apath)
         end
         new({
-          :name        => aug.get(spath),
-          :ensure      => :present,
-          :args        => args,
-          :context     => context,
-          :args_params => 0
-        })
+              name: aug.get(spath),
+              ensure: :present,
+              args: args,
+              context: context,
+              args_params: 0
+            })
       end
     end
   end
@@ -64,7 +64,7 @@ Puppet::Type.type(:apache_directive).provide(:augeas, :parent => Puppet::Type.ty
       top_path += "/#{resource[:context]}" unless resource[:context].empty?
       last_path = "#{top_path}/directive[.='#{resource[:name]}'][last()]"
       if aug.match(last_path).empty?
-        aug.clear("#{top_path}/directive[last()+1]") 
+        aug.clear("#{top_path}/directive[last()+1]")
       else
         # Prefer to insert the new node after the last directive with the same name
         aug.insert(last_path, 'directive', false)
@@ -73,8 +73,8 @@ Puppet::Type.type(:apache_directive).provide(:augeas, :parent => Puppet::Type.ty
       # The new node is the only directive without a value
       aug.defvar('new', "#{top_path}/directive[.='']")
       aug.set('$new', resource[:name])
-      resource[:args].each_with_index do |a,i|
-        aug.set("$new/arg[#{i+1}]", a)
+      resource[:args].each_with_index do |a, i|
+        aug.set("$new/arg[#{i + 1}]", a)
       end
     end
   end
