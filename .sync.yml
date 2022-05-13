@@ -5,3 +5,6 @@ Gemfile:
       - gem: ruby-augeas
 .github/workflows/ci.yml:
   additional_packages: libaugeas-dev augeas-tools
+spec/spec_helper.rb:
+  spec_overrides:
+    - "require 'spec_helper_local'"
