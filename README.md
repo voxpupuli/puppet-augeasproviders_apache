@@ -1,10 +1,13 @@
-[![Puppet Forge Version](http://img.shields.io/puppetforge/v/herculesteam/augeasproviders_apache.svg)](https://forge.puppetlabs.com/herculesteam/augeasproviders_apache)
-[![Puppet Forge Downloads](http://img.shields.io/puppetforge/dt/herculesteam/augeasproviders_apache.svg)](https://forge.puppetlabs.com/herculesteam/augeasproviders_apache)
-[![Puppet Forge Endorsement](https://img.shields.io/puppetforge/e/herculesteam/augeasproviders_apache.svg)](https://forge.puppetlabs.com/herculesteam/augeasproviders_apache)
-[![Build Status](https://img.shields.io/travis/hercules-team/augeasproviders_apache/master.svg)](https://travis-ci.org/hercules-team/augeasproviders_apache)
-[![Coverage Status](https://img.shields.io/coveralls/hercules-team/augeasproviders_apache.svg)](https://coveralls.io/r/hercules-team/augeasproviders_apache)
-[![Sponsor](https://img.shields.io/badge/%E2%99%A5-Sponsor-hotpink.svg)](https://github.com/sponsors/raphink)
 
+[![Build Status](https://github.com/voxpupuli/puppet-augeasproviders_apache/workflows/CI/badge.svg)](https://github.com/voxpupuli/puppet-augeasproviders_apache/actions?query=workflow%3ACI)
+[![Release](https://github.com/voxpupuli/puppet-augeasproviders_apache/actions/workflows/release.yml/badge.svg)](https://github.com/voxpupuli/puppet-augeasproviders_apache/actions/workflows/release.yml)
+[![Puppet Forge](https://img.shields.io/puppetforge/v/puppet/augeasproviders_apache.svg)](https://forge.puppetlabs.com/puppet/augeasproviders_apache)
+[![Puppet Forge - downloads](https://img.shields.io/puppetforge/dt/puppet/augeasproviders_apache.svg)](https://forge.puppetlabs.com/puppet/augeasproviders_apache)
+[![Puppet Forge - endorsement](https://img.shields.io/puppetforge/e/puppet/augeasproviders_apache.svg)](https://forge.puppetlabs.com/puppet/augeasproviders_apache)
+[![Puppet Forge - scores](https://img.shields.io/puppetforge/f/puppet/augeasproviders_apache.svg)](https://forge.puppetlabs.com/puppet/augeasproviders_apache)
+[![puppetmodule.info docs](http://www.puppetmodule.info/images/badge.png)](http://www.puppetmodule.info/m/puppet-augeasproviders_apache)
+[![Coverage Status](https://img.shields.io/coveralls/voxpupuli/puppet-augeasproviders_apache.svg)](https://coveralls.io/r/voxpupuli/puppet-augeasproviders_apache)
+[![Apache-2 License](https://img.shields.io/github/license/voxpupuli/puppet-augeasproviders_apache.svg)](LICENSE)
 
 # apache: types/providers for apache files for Puppet
 
