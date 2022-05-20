@@ -1,3 +1,10 @@
 ---
-.travis.yml:
-  forge_password: "HPcnq8CAjz31Lz1Mh4p8QV9orwHoDAaSM73aqhWVYmz21eMCmg4NnyjtIQyR75c3NlDHgDVhEKujT+4WT5V4CvNFIJseD0ox6vwuLwefxJs3jAKYJxDAjCv/sL1GcQwR4IKs+bTh97MBbha2QBPG/REGUYfr3xlVCtxDo2TtnTc="
+Gemfile:
+  optional:
+    ':test':
+      - gem: ruby-augeas
+.github/workflows/ci.yml:
+  additional_packages: libaugeas-dev augeas-tools
+spec/spec_helper.rb:
+  spec_overrides:
+    - "require 'spec_helper_local'"
