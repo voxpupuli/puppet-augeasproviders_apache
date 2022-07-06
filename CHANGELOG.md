@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v4.0.0](https://github.com/voxpupuli/puppet-augeasproviders_apache/tree/v4.0.0) (2022-07-06)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-augeasproviders_apache/compare/v3.2.0...v4.0.0)
+
+**Breaking changes:**
+
+- Drop EoL OS from metadata.json [\#14](https://github.com/voxpupuli/puppet-augeasproviders_apache/pull/14) ([bastelfreak](https://github.com/bastelfreak))
+
 ## [v3.2.0](https://github.com/voxpupuli/puppet-augeasproviders_apache/tree/v3.2.0) (2022-05-20)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-augeasproviders_apache/compare/3.1.1...v3.2.0)
