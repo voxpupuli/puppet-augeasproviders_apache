@@ -41,10 +41,10 @@ describe provider_class do
         }
       end
 
-      inst.size.should == 49
-      inst[0].should == { args: ['${APACHE_LOCK_DIR}/accept.lock'], name: 'LockFile', ensure: :present, context: '' }
-      inst[5].should == { args: ['5'], name: 'KeepAliveTimeout', ensure: :present, context: '' }
-      inst[30].should == { args: ['150'], context: 'IfModule[1]', name: 'MaxClients', ensure: :present }
+      expect(inst.size).to eq(49)
+      expect(inst[0]).to eq({ args: ['${APACHE_LOCK_DIR}/accept.lock'], name: 'LockFile', ensure: :present, context: '' })
+      expect(inst[5]).to eq({ args: ['5'], name: 'KeepAliveTimeout', ensure: :present, context: '' })
+      expect(inst[30]).to eq({ args: ['150'], context: 'IfModule[1]', name: 'MaxClients', ensure: :present })
     end
   end
 
@@ -82,7 +82,7 @@ describe provider_class do
                ))
 
         aug_open(target, 'Httpd.lns') do |aug|
-          aug.get("directive[.='Timeout']/arg").should == '0'
+          expect(aug.get("directive[.='Timeout']/arg")).to eq('0')
         end
       end
 
@@ -142,7 +142,7 @@ describe provider_class do
           { "IfModule" { "directive" = "StartServers" { "arg" = "2" } } }
         ')
         aug_open(target, 'Httpd.lns') do |aug|
-          aug.get("IfModule[1]/directive[.='StartServers']/arg").should == '2'
+          expect(aug.get("IfModule[1]/directive[.='StartServers']/arg")).to eq('2')
         end
       end
     end
@@ -157,7 +157,7 @@ describe provider_class do
              ))
 
       aug_open(target, 'Httpd.lns') do |aug|
-        aug.match("directive[.='Timeout']").size.should == 0
+        expect(aug.match("directive[.='Timeout']").size).to eq(0)
       end
     end
   end
@@ -179,7 +179,7 @@ describe provider_class do
                ))
 
         aug_open(target, 'Httpd.lns') do |aug|
-          aug.get("IfModule[arg='mpm_worker_module']/directive[.='StartServers']/arg").should == '2'
+          expect(aug.get("IfModule[arg='mpm_worker_module']/directive[.='StartServers']/arg")).to eq('2')
         end
       end
 
@@ -211,6 +211,10 @@ describe provider_class do
     let(:tmptarget) { aug_fixture('broken') }
     let(:target) { tmptarget.path }
 
+    if @logs.nil?
+      @logs = []
+      Puppet::Util::Log.newdestination(Puppet::Test::LogCollector.new(@logs))
+    end
     it 'fails to load' do
       txn = apply(Puppet::Type.type(:apache_directive).new(
                     name: 'SetEnv',
@@ -220,9 +224,9 @@ describe provider_class do
                     provider: 'augeas'
                   ))
 
-      txn.any_failed?.should_not.nil?
-      @logs.first.level.should == :err
-      @logs.first.message.include?(target).should == true
+      expect(txn.any_failed?).not_to be_nil
+      expect(@logs.first.level).to eq(:err)
+      expect(@logs.first.message).to include(target)
     end
   end
 end

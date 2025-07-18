@@ -39,9 +39,9 @@ describe provider_class do
         }
       end
 
-      inst.size.should == 2
-      inst[0].should == { name: 'TEST', ensure: :present, value: 'test' }
-      inst[1].should == { name: 'TEST2', ensure: :present, value: :absent }
+      expect(inst.size).to eq(2)
+      expect(inst[0]).to eq({ name: 'TEST', ensure: :present, value: 'test' })
+      expect(inst[1]).to eq({ name: 'TEST2', ensure: :present, value: :absent })
     end
   end
 
@@ -80,7 +80,7 @@ describe provider_class do
 
         # Should have deleted the second FQDN entry
         aug_open(target, 'Httpd.lns') do |aug|
-          aug.match("directive[.='SetEnv' and arg[1]='FQDN']").size.should == 1
+          expect(aug.match("directive[.='SetEnv' and arg[1]='FQDN']").size).to eq(1)
         end
 
         augparse(target, 'Httpd.lns', '
@@ -141,9 +141,9 @@ describe provider_class do
                     provider: 'augeas'
                   ))
 
-      txn.any_failed?.should_not.nil?
-      @logs.first.level.should == :err
-      @logs.first.message.include?(target).should == true
+      expect(txn.any_failed?).not_to be_nil
+      expect(@logs.first.level).to eq(:err)
+      expect(@logs.first.message).to include(target)
     end
   end
 end
