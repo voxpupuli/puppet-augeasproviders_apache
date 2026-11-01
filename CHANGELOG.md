@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v6.0.0](https://github.com/voxpupuli/puppet-augeasproviders_apache/tree/v6.0.0) (2026-11-01)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-augeasproviders_apache/compare/v5.0.0...v6.0.0)
+
+**Breaking changes:**
+
+- Drop puppet, update openvox minimum version to 8.19 [\#40](https://github.com/voxpupuli/puppet-augeasproviders_apache/pull/40) ([TheMeier](https://github.com/TheMeier))
+
+**Implemented enhancements:**
+
+- allow puppet-augeasproviders\_core 6.x [\#53](https://github.com/voxpupuli/puppet-augeasproviders_apache/pull/53) ([marcusdots](https://github.com/marcusdots))
+- Add basic acceptance tests [\#52](https://github.com/voxpupuli/puppet-augeasproviders_apache/pull/52) ([bwitt](https://github.com/bwitt))
+- Update requirements to allow OpenVox 9 [\#51](https://github.com/voxpupuli/puppet-augeasproviders_apache/pull/51) ([sebastianrakel](https://github.com/sebastianrakel))
+- Add support for Debian 12 [\#42](https://github.com/voxpupuli/puppet-augeasproviders_apache/pull/42) ([smortex](https://github.com/smortex))
+- metadata.json: Add OpenVox [\#37](https://github.com/voxpupuli/puppet-augeasproviders_apache/pull/37) ([jstraw](https://github.com/jstraw))
+
 ## [v5.0.0](https://github.com/voxpupuli/puppet-augeasproviders_apache/tree/v5.0.0) (2023-06-22)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-augeasproviders_apache/compare/v4.0.0...v5.0.0)
